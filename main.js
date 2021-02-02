@@ -10,6 +10,31 @@ function getTimeFromSeconds(segundos) {
   return data.toLocaleTimeString('pt-BR', { hour12: false, timeZone: 'GMT' });
 }
 
+document.addEventListener('click', (e) => {
+  const el = e.target;
+
+  switch(el) {
+    case el.classList.contains('iniciar'): {
+      initTimer();
+    }
+
+    case el.classList.contains('pausar'): {
+      clearInterval(timer);
+      iniciar.removeAttribute('disabled');
+      relogio.classList.add('active');
+    }
+
+    case el.classList.contains('zerar'): {
+      clearInterval(timer);
+      segundos = 0;
+      relogio.innerText = '00:00:00'
+      iniciar.removeAttribute('disabled');
+      relogio.classList.remove('active')
+    }
+  }
+  
+})
+
 function initTimer() {
   clearInterval(timer);
   relogio.classList.remove('active')
@@ -20,16 +45,16 @@ function initTimer() {
   }, 1000)
 }
 
-iniciar.addEventListener('click', initTimer);
-pausar.addEventListener('click', () => {
-  clearInterval(timer);
-  iniciar.removeAttribute('disabled');
-  relogio.classList.add('active')
-})
-zerar.addEventListener('click', () => {
-  clearInterval(timer);
-  segundos = 0;
-  relogio.innerText = '00:00:00'
-  iniciar.removeAttribute('disabled');
-  relogio.classList.remove('active')
-})
+// iniciar.addEventListener('click', initTimer);
+// pausar.addEventListener('click', () => {
+//   clearInterval(timer);
+//   iniciar.removeAttribute('disabled');
+//   relogio.classList.add('active')
+// })
+// zerar.addEventListener('click', () => {
+//   clearInterval(timer);
+//   segundos = 0;
+//   relogio.innerText = '00:00:00'
+//   iniciar.removeAttribute('disabled');
+//   relogio.classList.remove('active')
+// })
